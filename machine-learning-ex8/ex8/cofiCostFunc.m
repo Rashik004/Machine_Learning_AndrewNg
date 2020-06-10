@@ -40,12 +40,13 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
-predictionError=(X*Theta'-Y).*R;
-J=sum((predictionError.^2)(:))/2;
+predictionError=(X*Theta'-Y).*R; %Element-wise multiplication with R in order to get rid of not rated movies
+J=sum((predictionError.^2)(:))/2 + sum((Theta.^2)(:))*lambda*0.5 + sum((X.^2)(:))*lambda*0.5;
 
 
-X_grad=predictionError*Theta;
-Theta_grad=predictionError'*X;
+X_grad=predictionError*Theta + lambda*X;
+Theta_grad=predictionError'*X + lambda*Theta;
+
 
 
 

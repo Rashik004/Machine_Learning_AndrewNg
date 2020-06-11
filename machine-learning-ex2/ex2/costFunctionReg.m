@@ -35,6 +35,9 @@ for j=2:size(theta)(1)
 endfor
 regular
 J=J+(lambda*regular)/(2*m);
+temp=theta;
+temp(1)=0;
+grad=grad+lambda*temp/m;
 
 
 
